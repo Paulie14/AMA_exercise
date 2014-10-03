@@ -1,0 +1,720 @@
+\documentclass[a4paper,10pt]{book}
+%\usepackage[active]{srcltx}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{proposition}[theorem]{Tvrzení}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{remark}[theorem]{Poznámka}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{exercise}[theorem]{Cvičení}
+
+%\numberwithin{equation}{document}
+%
+\def\div{{\rm div}}
+\def\Lapl{\Delta}
+\def\grad{\nabla}
+\def\supp{{\rm supp}}
+\def\dist{{\rm dist}}
+%\def\chset{\mathbbm{1}}
+\def\chset{1}
+%
+\def\Tr{{\rm Tr}}
+\def\to{\rightarrow}
+\def\weakto{\rightharpoonup}
+\def\imbed{\hookrightarrow}
+\def\cimbed{\subset\subset}
+\def\range{{\mathcal R}}
+\def\leprox{\lesssim}
+\def\argdot{{\hspace{0.18em}\cdot\hspace{0.18em}}}
+\def\Distr{{\mathcal D}}
+\def\calK{{\mathcal K}}
+\def\FromTo{|\rightarrow}
+\def\convol{\star}
+\def\impl{\Rightarrow}
+\DeclareMathOperator*{\esslim}{esslim}
+\DeclareMathOperator*{\esssup}{ess\,supp}
+\DeclareMathOperator{\ess}{ess}
+\DeclareMathOperator{\osc}{osc}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\cotg}{cotg}
+
+%
+%\def\Ess{{\rm ess}}
+%\def\Exp{{\rm exp}}
+%\def\Implies{\Longrightarrow}
+%\def\Equiv{\Longleftrightarrow}
+% ****************************************** GENERAL MATH NOTATION
+\def\Real{{\rm\bf R}}
+\def\C{{\rm\bf C}}
+\def\Rd{{{\rm\bf R}^{\rm 3}}}
+\def\RN{{{\rm\bf R}^N}}
+\def\D{{\mathbb D}}
+\def\Nnum{{\rm\bf N}}
+\def\Qnum{{\rm\bf Q}}
+\def\Measures{{\mathcal M}}
+\def\d{\,{\rm d}}               % differential
+\def\sdodt{\genfrac{}{}{}{1}{\rm d}{{\rm d}t}}
+\def\dodt{\genfrac{}{}{}{}{\rm d}{{\rm d}t}}
+%
+\def\vc#1{\mathbf{\boldsymbol{#1}}}     % vector
+\def\tn#1{{\mathbb{#1}}}    % tensor
+\def\abs#1{\lvert#1\rvert}
+\def\Abs#1{\bigl\lvert#1\bigr\rvert}
+\def\bigabs#1{\bigl\lvert#1\bigr\rvert}
+\def\Bigabs#1{\Big\lvert#1\Big\rvert}
+\def\ABS#1{\left\lvert#1\right\rvert}
+\def\norm#1{\bigl\Vert#1\bigr\Vert} %norm
+\def\metr#1#2{\d\bigl(#1,#2\bigr)}          %metric
+\def\close#1{\overline{#1}}
+\def\inter#1{#1^\circ}
+\def\eqdef{\mathrel{\mathop:}=}     % defining equivalence
+\def\where{\,|\,}                    % "where" separator in set's defs
+\def\timeD#1{\dot{\overline{{#1}}}}
+%
+% ******************************************* USEFULL MACROS
+\def\RomanEnum{\renewcommand{\labelenumi}{\rm (\roman{enumi})}}   % enumerate by roman numbers
+\def\rf#1{(\ref{#1})}                                             % ref. shortcut
+\def\prtl{\partial}                                        % partial deriv.
+\def\Names#1{{\scshape #1}}
+\def\rem#1{{\parskip=0cm\par!! {\sl\small #1} !!}}
+\def\vysl#1{\par$[$ #1 $]$}
+
+
+\usepackage{paralist}
+\usepackage{tabto}
+\usepackage[inline]{enumitem}
+\newenvironment{tabbedenum}[1]
+ {\NumTabs{#1}\inparaenum\let\latexitem\item
+  \def\item{\def\item{\tab\latexitem}\latexitem}}
+{\endinparaenum}
+
+ 
+%
+%
+% ******************************************* DOCUMENT NOTATIONS
+% document specific
+%***************************************************************************
+%
+\addtolength{\textwidth}{2cm}
+\addtolength{\vsize}{2cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\begin{document}
+\newcommand{\refbf}[1]{\textbf{\ref{#1}}}
+
+\parskip=2ex
+
+\parindent=0pt
+\pagestyle{empty}
+
+
+\chapter{Linear Algebra}
+
+\section{Systems of linear equations}
+\exercise \label{ex:slr1} Solve the given system of linear algebraic equations using the Gauss elimination.
+\begin{center}
+\begin{tabular}{ccc}
+a)  $\begin{array}{rcl}
+    2x+2y+5z & = & 11 \\
+    x+y+z & = & 4 \\
+    4x+6y+8z & = & 24 
+  \end{array} $ &
+b)  $\begin{array}{rcl}
+    3x+y+z-2w & = & 6 \\
+    2x-z+w & = & 9 \\
+    x-2y+z+3w & = & 2 \\
+    -3x+y+z-2w & = & -12
+  \end{array} $ &
+c)  $\begin{array}{rcl}
+    2x - 3y - 2z + w & = & 3 \\
+    x - y - z - w & = & 2 \\
+    x - 2y - z + 2w & = & 1 \\
+    2y + 2z + w & = & 1
+  \end{array} $ \\  
+d)  $\begin{array}{rcl}
+    x - 2y + z - 3w & = & -3 \\
+    x + y - 2z + 2w & = & 5 \\
+    3x - 3z + w & = & 7 \\
+    2x - y - z - w & = & 2
+  \end{array} $ &
+e) \begin{minipage}[h!]{5cm}
+   $\, $\\
+   $\mathbf{Ax} =\vc{b}$, where \\
+   $\mathbf{A} = \begin{pmatrix} 
+                      1 & 2 & 3 & 1 \\ 
+                      2 & 4 & 7 & 7 \\
+                      1 & 0 & 2 & 0 \\
+                      3 & 7 & 10 & 6 \\
+                  \end{pmatrix}$,\\
+    $\vc{b}=(1,4,-2,7)^{T}$. 
+    \end{minipage} &
+\end{tabular}
+\end{center}
+
+\exercise \label{ex:slr2} Solve the given system of linear algebraic equations dependent on a parameter $\lambda\in\Real$.
+\begin{center}
+\begin{tabular}{ccc}
+a)  $\begin{array}{rcl}
+    \lambda x + y + z & = & 1 \\
+    x + \lambda y + z & = & 1 \\
+    x + y + \lambda z & = & 1 
+  \end{array} $ %&
+% b)  $\begin{array}{rcl}
+%     3x+y+z-2w & = & 6 \\
+%     2x-z+w & = & 9 \\
+%     x-2y+z+3w & = & 2 \\
+%     -3x+y+z-2w & = & -12
+%   \end{array} $ &
+% c)  $\begin{array}{rcl}
+%     3x+y+z-2w & = & 6 \\
+%     2x-z+w & = & 9 \\
+%     x-2y+z+3w & = & 2 \\
+%     -3x+y+z-2w & = & -12
+%   \end{array} $   
+\end{tabular}
+\end{center}
+
+\section{Matrices, eigenvalues and eigenvectors}
+\exercise \label{ex:mvlc1} Compute the determinant of the given matrix $\mathbf{A}$ and the inverse $\mathbf{A}^{-1}$.
+
+\begin{center}
+\begin{tabular}{ccc}
+a)  $ \mathbf{A}=
+          \begin{pmatrix}
+            1 & 6 & -16 \\
+            -1 & -3 & 10 \\
+            1 & 3 & -7
+          \end{pmatrix}
+  $ &
+b)  $ \mathbf{A}=
+          \begin{pmatrix}
+            1 & 6 & -16 \\
+            -1 & -3 & 10 \\
+            1 & 3 & -7
+          \end{pmatrix}
+  $ &  
+c)  $ \mathbf{A}=
+          \begin{pmatrix}
+            2 & 2 & 3 \\
+            1 & -1 & 0 \\
+            -1 & 2 & 1
+          \end{pmatrix}
+  $
+\end{tabular}
+\end{center}
+
+\exercise \label{ex:mvlc2} Compute the eigenvalues and eigenvectors of the given matrix:
+
+\begin{tabbedenum}{3}
+\item $\begin{pmatrix} 1 & 2 \\ 4 & 3 \end{pmatrix}$
+\item $\begin{pmatrix} 4 & 2 \\ -1 & 1 \end{pmatrix}$
+\item $\begin{pmatrix} -3 & 4 & -2 \\ 1 & 0 & 1 \\ 6 & -6 & 5 \end{pmatrix}$
+\item $\begin{pmatrix} -1 & 1 & 1 \\ 1 & -1 & 1 \\ 1 & 1 & 1 \end{pmatrix}$
+\end{tabbedenum}
+
+\section{Linear combination, vector space basis}
+
+\exercise \label{ex:lkb1} Are the vectors linearly independent?
+
+\begin{center}
+\begin{tabular}{cccc}
+a)  $ \begin{array}{rcl}
+        \vec{x_1} &=& (1, -1, 2) \\
+        \vec{x_2} &=& (-2, 3, 1) \\
+        \vec{x_3} &=& (-1, 3, 8) 
+      \end{array}
+  $ &
+b)  $ \begin{array}{rcl}
+        \vec{x_1} &=& (1, -1, 2) \\
+        \vec{x_2} &=& (-2, 3, 1) \\
+        \vec{x_3} &=& (-1, 3, 7) \\
+      \end{array}
+  $ &  
+c)  $ \begin{array}{rcl}
+        \vec{x_1} &=& (1, 2, 4) \\
+        \vec{x_2} &=& (2, 1, 3) \\
+        \vec{x_3} &=& (4, -1, 1) \\
+      \end{array}
+  $ 
+\end{tabular}
+\end{center}
+
+\exercise \label{ex:lkb2} Check if the vector $\vec{y}$ is a linear combination of the vector set $\vec{x_1}$, $\vec{x_2}$ and $\vec{x_3}$.
+
+  \begin{enumerate*} 
+    \item $\vec{y}=(2,8,12)$, $\vec{x_1}=(1,2,1)$, $\vec{x_2}=(3,2,-1)$ a $\vec{x_3}=(1,2,3)$  \\
+    \item $\vec{y}=(2,8,8)$, $\vec{x_1}=(1,2,1)$, $\vec{x_2}=(3,3,5)$ a $\vec{x_3}=(1,-1,3)$  \\
+  \end{enumerate*}
+  
+\exercise \label{ex:lkb3} Express the polynomial $p = x^2+x+1$ as a linear combination of the given polynomials
+  \begin{eqnarray*}
+    p_1 &=& 2x + 3 \\
+    p_2 &=& x^2+2x+3 \\
+    p_3 &=& -x^2+2x \\
+    p_4 &=& -2x^2+x+2
+  \end{eqnarray*}
+
+\exercise \label{ex:lkb4} Can the given matrices make a basis of the space $\Real^{2\times2}$? 
+If not, write an arbitrary basis of that space.
+\vspace{-1em}
+\begin{center}
+$ \begin{pmatrix}
+        1 & 1 \\ -3 & -4
+  \end{pmatrix} \quad
+  \begin{pmatrix}
+        3 & 3 \\ 7 & 2
+  \end{pmatrix} \quad
+  \begin{pmatrix}
+        2 & 1 \\ 1 & -1
+  \end{pmatrix} \quad
+  \begin{pmatrix}
+        1 & 6 \\ 10 & 3
+  \end{pmatrix}
+$ 
+\end{center}
+
+\exercise \label{ex:lkb5} 
+Let $V(\Omega)$ be a vector space of continuous functions defined in the given interval $\Omega$. 
+Find out whether the functions $a,b,c\in V(\Omega)$ are linearly independent.
+
+\begin{enumerate}[label=\alph*)]
+\item $a = e^x$, $b = x$, $x \in \Omega=\Real$,
+\item $a = x^2 +\frac{x}{2}-\frac{1}{2}$, $b=\frac{x^2}{3}+\frac{1}{3}$, 
+      $c=x^2+x-2$, $x \in \Omega=\Real$,
+\item $a = \sin x$, $b = \cos x$, $x \in \Omega=[0, 2\pi]$,
+\item $a = 2\cos 2x$, $b = -\cos2x$, $c = -1$, $x \in \Omega=[-\pi, \pi]$.
+\end{enumerate}
+
+\section{Vector spaces}
+\exercise \label{ex:vek1} Ověřte, že zadaná množina je uzavřená pro definované operace sčítání a~násobení a~dohromady tvoří lineární vektorový prostor. 
+\begin{equation}
+  x\oplus y=x\cdot y, \quad \alpha \odot x = x^\alpha, \quad x,y \in \Real^{+}  \nonumber
+\end{equation}
+
+\exercise \label{ex:vek2} Mějme lineární vektorový prostor $M=\{(a,b,c)\where a,b,c\in\Real\}$ nad tělesem reálných čísel (odpovídá $\Rd$). 
+Ověřte, že množina $N=\{(a,b,c)\where a+2b=0, c\in\Real\}$ je jeho podprostorem $N\subset M$. 
+
+\exercise \label{ex:vek3} Mějme lineární vektorový prostor $\Rd$. Ověřte, že množina $N$ je jeho podprostorem: $N=\{(a,b,c)| 2a-b-c=3\}$, $N\subset \Rd$.
+
+\exercise \label{ex:vek4} Ověřte, že $M=\{p\in\mathcal{P}\where 2p(0)=p(1)\}$ je podprostorem polynomů $\mathcal{P}$.
+
+\exercise \label{ex:vek5} Určete, která z následujících množin funkcí spolu s operací sčítání
+funkcí a operací násobení funkce reálným číslem tvoří vektorový prostor.
+\begin{enumerate}[label=\alph*)]
+\item množina funkcí ohraničených na $[a, b]$,
+\item množina funkcí rostoucích na $[a, b]$,
+\item množina funkcí monotonních na $[a, b]$,
+\item množina sudých funkcí na $[-a, a]$, $a > 0$.
+\end{enumerate}
+
+\exercise \label{ex:vek6} Určete, které z číselných množin při sčítání a násobení reálným číslem definovanými
+přirozeným způsobem tvoří vektorový prostor, a v kladném případě určete jeho nulový
+vektor.
+\begin{enumerate}[label=\alph*)]
+\item množina komplexních čísel $\rm\bf{C}$,
+\item množina reálných čísel $\Real$,
+\item množina kladných reálných čísel $\Real^+$,
+\item množina racionálních čísel $\rm\bf{Q}$.
+\end{enumerate}
+
+\exercise \label{ex:vek7} Nechť $P$ je množina posloupností reálných čísel spolu s operací sčítání (součet
+posloupností) a násobení reálným číslem (násobení posloupnosti reálným číslem).
+Zjistěte, zda $P$ tvoří vektorový prostor, jestliže
+\begin{enumerate}[label=\alph*)]
+\item $P$ je množina všech posloupností, které mají limitu 0,
+\item $P$ je množina všech posloupností, které mají limitu 1,
+\item $P$ je množina všech konvergentních posloupností.
+\end{enumerate}
+
+\exercise \label{ex:vek8} Ověřte, zdali množina všech polynomů $\mathcal{P}^{n}$
+nejvýše stupně $n$ tvoří vektorový prostor. Operace sčítání a násobení reálným číslem jsou 
+definovány přirozeně.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%                                  ŘEŠENÍ                          %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Řešení}
+
+\refbf{ex:slr1} 
+\begin{enumerate}[leftmargin=.75cm,align=left,label={\alph*)},itemsep=-5pt, topsep=-7pt]
+    \item $S=\{(1,2,1)\}$
+    \item $S=\{(3,1,-2,1)\}$  
+    \item $S=\{\frac{1}{2}(t+5,6t+2,-7t-1,t)\where t\in\Real\}$    
+    \item $S=\{(t,5t-4s-9,s,-3t+3s+7)\where t,s\in\Real\}$
+    \item nemá řešení, $S=\emptyset$
+  \end{enumerate}
+  
+\refbf{ex:slr2} 
+\begin{enumerate}[leftmargin=.75cm,labelsep=0cm,align=left,label={},itemsep=-5pt, topsep=-7pt]
+ \item $\lambda_1=0,\, S_1=\{(1-r-s,r,s)\where r,s\in\Real\};\,$
+ \item         $\lambda_2=-2,\, S_2=\emptyset; \,$
+ \item    $\lambda_3\in\Real\setminus\{-2,1\},\, S_3=\{\frac{1}{\lambda+2}(1,1,1)\}$
+\end{enumerate}
+
+\refbf{ex:mvlc1} a) $\det\mathbf{A}=9$, $\mathbf{A}^{-1}=\frac{1}{3}\bigl(\begin{smallmatrix} -3 & -2 & 4\\ 1 & 3 & 2 \\ 0 & 1 & 1 \end{smallmatrix} \bigr)$  
+               b) $\det\mathbf{A}=0$, $\mathbf{A}^{-1}$ neexistuje
+               c) $\det\mathbf{A}=-1$, $\mathbf{A}^{-1}=\bigl(\begin{smallmatrix} 1 & -4 & -3\\ 1 & -5 & -3 \\ -1 & 6 & 4 \end{smallmatrix} \bigr)$  
+    
+\refbf{ex:mvlc2} 
+  \begin{enumerate}[leftmargin=.75cm,align=left,itemsep=-5pt, topsep=-7pt]
+    \item $\lambda=\{5,-1\}$, $v=\{(1,2),(1,-1)\}$  
+    \item $\lambda=\{2,3\}$, $v=\{(1,-1),(-2,1)\}$  
+    \item $\lambda=\{1,-1,2\}$, $v=\{(1,1,0),(1,0,-1),(1,2,3)\}$    
+    \item $\lambda=\{-1,2,-2\}$, $v=\{(-1,-1,1),(-1,1,0),(1,1,2)\}$
+  \end{enumerate}
+
+\refbf{ex:lkb1} a) ne, b) ano, c) ano \\
+\refbf{ex:lkb2} ano, s koeficienty $a=(2,-1,3)$ \\
+\refbf{ex:lkb3} $p = \alpha_i p_i$, kde koeficienty $\vec\alpha=\{(-\frac{1}{6}(17t+5),
+              \frac{1}{6}(13t+7),\frac{1}{6}(t+1),t)\where t\in\Real\}$ \\
+\refbf{ex:lkb4} ne, jsou lineárně závislé, báze: 
+$ \left\{\left(\begin{smallmatrix} 1 & 0 \\ 0 & 0
+  \end{smallmatrix}\right),\,
+  \left(\begin{smallmatrix}
+        0 & 1 \\ 0 & 0
+  \end{smallmatrix}\right),\,
+  \left(\begin{smallmatrix}
+        0 & 0 \\ 1 & 0
+  \end{smallmatrix} \right),\,
+  \left(\begin{smallmatrix}
+        0 & 0 \\ 0 & 1
+  \end{smallmatrix}\right)\right\}
+$ \\
+\refbf{ex:lkb5}
+  \begin{enumerate}[label=\alph*), itemsep=-5pt, topsep=-7pt]
+    \item nezávislé    
+    \item závislé, s koeficienty $\vec\alpha=\{(-2t,3t,t)\where t\in\Real\}$
+    \item nezávislé
+    \item závislé, s koeficienty $\vec\alpha=\{(t,-t,t)\where t\in\Real\}$
+  \end{enumerate}
+
+\refbf{ex:vek1} ano   \\
+\refbf{ex:vek2} ano   \\
+\refbf{ex:vek3} ne, není uzavřen pro $\oplus$ 
+\refbf{ex:vek4} ano   \\
+\refbf{ex:vek5} 
+  \begin{enumerate}[label=\alph*), itemsep=-5pt, topsep=-7pt]
+    \item ano
+    \item ne, pro rostoucí funkci $f(x)$, není $kf(x)$ pro $k<0$ rostoucí
+    \item ne, např. pro funkce $f(x)=-x$ a $g(x)=x^2$ na intervalu $[0,1]$, je $f(x)+g(x)$   
+          nemonotonní
+    \item ano
+  \end{enumerate}
+\refbf{ex:vek6} 
+  \begin{enumerate}[label=\alph*), itemsep=-5pt, topsep=-7pt]
+    \item ano, $\vec{0}=0$
+    \item ano, $\vec{0}=0$
+    \item ne, pro $x\in\Real^{+}$, $k\in\Real$ neplatí $kx\in\Real^{+}$
+    \item ne, pro $x\in\rm\bf{Q}$, $k\in\Real$ neplatí $kx\in\rm\bf{Q}$
+  \end{enumerate}
+\refbf{ex:vek7}
+  \begin{enumerate}[label=\alph*), itemsep=-5pt, topsep=-7pt]
+    \item ano    
+    \item ne, $\lim\left((a)+(b)\right) = \lim (a) + \lim(b) = 2$
+    \item ano
+  \end{enumerate}
+
+
+
+\chapter{Metrické, normované prostory, operátory, konvergence}
+Norma splňuje:
+\begin{enumerate}[label=N), itemsep=-3pt, topsep=-7pt]
+\item $\norm{x}=0$ \label{norm1}
+\item $\norm{x}=\abs{\alpha}\norm{x}$ \label{norm2}
+\item $\norm{x+y}\leq \norm{x} + \norm{y}$ \label{norm3}
+\end{enumerate}
+
+Metrika je generována normou $\metr{x}{y} = \norm{x-y}$ (neplatí opačně), splňuje:
+\begin{enumerate}[label=M), itemsep=-3pt, topsep=-7pt]
+\item $\metr{x}{y} \geq 0$
+\item $\metr{x}{y} = \metr{y}{x}$
+\item $\metr{x}{y}\leq \metr{x}{z} + \metr{z}{y}$
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\exercise \label{ex:metr1} Ověřte, že množina $M \subset \Real^2, M=\{\vec{x}=(a,2a) \where a\in\Real\}$ s~normou 
+  $\norm{(x_1,x_2)}=\abs{x_1}$ tvoří normovaný vektorový podprostor.
+  
+\exercise \label{ex:metr2} Ověřte, že množina $M \subset \Real^2$ s~normou 
+  $\norm{(x_1,x_2)}=\left(\sqrt{\abs{x_1}} + \sqrt{\abs{x_2}}\right)^2$ tvoří normovaný vektorový podprostor.
+
+\exercise \label{ex:norm1} Ověřte, že zadané funkce jsou normami nebo metrikami.
+
+\begin{tabbedenum}{3}
+\item $\norm{u}=\sqrt{\int \limits_a^b \abs{u(x)} \d x}$
+\item $\norm{u}=\sqrt{\int \limits_a^b \abs{u(x)}^2 \d x}$
+\item $\norm{u}=\sqrt{\int \limits_a^b \abs{u(x)}^3 \d x}$
+\end{tabbedenum}
+
+\exercise \label{ex:norm2} Ověřte, že množina funkcí $M \subset \C [0,1]$ s normou 
+  $\norm{f}=\int \limits_0^1 \abs{f(x)}^2 \d x$ tvoří normovaný vektorový podprostor.
+
+\exercise \label{ex:norm3} Ověřte, že množina polynomů $M = \{p(x)=ax^2+bx+c \where a,b,c \in \Real\}$ s~normou 
+  $\norm{p}=\abs{p(0)}+\abs{p(1)}+\abs{p(2)}$ tvoří normovaný vektorový podprostor.
+
+\exercise \label{ex:norm4} Ověřte, že množina polynomů $M = \{p(x)=ax^2+2(a+b)x+b \where a,b \in \Real\}$ s~normou 
+  $\norm{p}=\abs{p'(-1)+p'(1)}+\abs{p''(0)}$ tvoří normovaný vektorový podprostor.
+  
+\exercise \label{ex:norm5} Ověřte, že množina polynomů $M = \{p(x)=ax^2+bx+b \where a,b \in \Real\}$ s~normou 
+  $\norm{p}$ tvoří normovaný vektorový podprostor. 
+\begin{enumerate}[label=\alph*), itemsep=-3pt, topsep=-7pt]
+  \item $\norm{p}=\abs{p'(-1)+p'(1)}$
+  \item $\norm{p}=\abs{p'(-1)+p'(1)}+\abs{p''(0)}$
+  \item $\norm{p}=\abs{p'(-1)+p'(1)}+\abs{p''(0)}^{\frac{1}{2}}$
+  \item $\norm{p}=\left(\sqrt{\abs{p'(-1)+p'(1)}}+\sqrt{\abs{p''(0)}}\right)^2$
+\end{enumerate}
+
+\exercise \label{ex:norm6} Ověřte, že množina polynomů $M = \{p(x)=ax^2+bx+c \where a,b,c \in \Real\}$ s~normou 
+  $\norm{p}=\abs{\int \limits_0^1 p(x) \d x} + \sqrt{p(1)^2 + p(0)^2}$ tvoří normovaný vektorový podprostor.
+
+\exercise \label{ex:norm7} Vypočítejte normu funkcí. 
+\begin{enumerate}[label={\alph*)},itemsep=-2pt, topsep=-7pt]
+         \item $L^1$, $L^\infty$, a $H^1$ normu pro funkci $f(x)=(x+1)(x-2)$ na intervalu $[-2,3]$.
+         \item $\norm{f}_{L^1([0,2])}$ a $\norm{f}_{L^\infty([0,1])}$ pro $f(x)=-x(x-1)$
+         \item $\norm{f}_{L^1([0,1])}$ a $\norm{f}_{L^2([0,1])}$ pro $f(x)=x^{-\frac12}$
+         \item $\norm{f}_{L^2([0,2\pi])}$ pro $f(x) =\sin(kx)$ a $f(x)=\cos(kx)$ kde $k$ je libovolné celé číslo.
+         \item $\norm{f}_{L^1([-\infty,\infty]}$ a $\norm{f}_{L^\infty([-\infty,\infty]}$  pro $f(x)=\frac{1}{1+x^2}$
+         \item normu v prostoru $H^1([-1,1])$ pro funkce $\sqrt[3]{x}$ a $\sqrt[3]{x^2}$, pro které hodnoty parametru
+                $p$ bude mít funkce $x^p$ konečnou normu?
+\end{enumerate}
+  
+\exercise \label{ex:op1} Ověřte, zda zadaný operátor je symetrický a pozitivně definitní. \\
+\begin{enumerate}[label=\alph*), itemsep=-3pt, topsep=-7pt]
+\item $A(u)=-\frac{\partial u}{\partial x}$ na intervalu $\Omega=[0,1]$, $\Tr(\Omega)=0$.
+\item $A(u)=-x\frac{\partial^2 u}{\partial x^2}-y \frac{\partial^2 u}{\partial y^2} + u \quad$ na $C^2_0(\Omega)$, $\Omega=(0,1)(0,1)$
+\item $A(u)=\lambda(x,y)\frac{\partial^2 u}{\partial x^2} + \mu(x,y) \frac{\partial^2u}{\partial y^2} + u \quad$ na $C^2_0(\Omega)$, $\Omega=(0,1)(0,1)$
+\item $A(u)=-4\frac{\partial^2 u}{\partial x^2}-\frac{\partial^2 u}{\partial y^2} + u \quad$ na $C^2_0(\Omega)$, $\Omega=(-2,2)(-2,2)$
+\item $A(u)=-\frac{\partial}{\partial x}\left(2x\frac{\partial u}{\partial x}\right) 
+            - \frac{\partial}{\partial x}\left(4y\frac{\partial u}{\partial y}\right) + u \quad$ na $C^2_0(\Omega)$, $\Omega=(0,2)(0,2)$
+\end{enumerate}  
+
+\exercise \label{ex:op2} Ověřte, zda zadaný operátor $A: X \to Y$ je lineární, symetrický a pozitivně definitní
+na daném prostoru se skalárním součinem $Z$. \\
+\begin{enumerate}[label={\alph*)},itemsep=-2pt, topsep=-7pt]
+  \item \begin{equation}
+          A:C^2((0,1))\to L^2((0,1)),\quad A(f)=\left(-\frac{\prtl^2 f}{\prtl x^2} +f \right),
+          \quad Z=L^2((0,1)) \nonumber
+        \end{equation}
+  \item \begin{equation}
+          A:C^2(\Omega)\to L^2(\Omega),\quad A(f)=\left(-\frac{\prtl^2 f}{\prtl x^2} -\frac{\prtl^2 f}{\prtl y^2} + f \right),
+          \quad Z=L^2(\Omega),\quad \Omega= \text{  koule v }\Real^2 \nonumber
+        \end{equation}
+\end{enumerate} 
+  
+\exercise \label{ex:op3} Ověřte, zda zadaný operátor $A: X \to Y$ je lineární, symetrický a pozitivně definitní
+na daném prostoru se skalárním součinem $Z$. Bude potřeba použít nerovnosti $(Af,f)_X \ge c(f',f')_X$ a $(f',f')_X \ge c(f,f)_X$.
+\begin{enumerate}[label={\alph*)},itemsep=-2pt, topsep=-7pt]
+  \item \begin{equation}
+            A:C^2(\Omega)\to L^2(\Omega),\quad A(f)=\left(-2\frac{\prtl^2 f}{\prtl x^2} -3 \frac{\prtl^2 f}{\prtl y^2} \right)
+            , \quad Z=L^2(\Omega),\quad \Omega=[0,1]\times[0,1] \nonumber
+        \end{equation}
+  \item \begin{equation}
+            A:C^2((1,2))\to L^2((1,2)),\quad A(f)=-\frac{\prtl }{\prtl x}\left( x^2 \frac{\prtl f}{\prtl x} \right)+ f,
+            \quad Z=L^2((1,2)) \nonumber
+         \end{equation}
+\end{enumerate} 
+
+\exercise \label{ex:con1} Ověřte, zdali je zadaná posloupnost konvergentní v normě $L_1$ a $L_\infty$.
+\begin{enumerate}[label=\alph*), itemsep=-3pt, topsep=-7pt]
+  \item $f_n(x)=\cos\left(\frac{x}{n}\right)e^{-x}$ na $[-1,1]$
+  \item $f_n(x)=2\cos\left(\frac{x}{n}\right)e^x$ na $[-1,1]$
+  \item $f_n(x)=x^2+\frac{x}{n}$ na $[0,1]$
+  \item $f_n(x)=x^n$ na $[0,1]$
+  \item $f_n(x)=x^\frac{1}{2n-1}$ na $[-1,1]$
+\end{enumerate}
+
+\exercise \label{ex:sp1} Vyberte z uvedených normovaných prostorů neúplné a svou volbu podložte stručně okomentovaným příkladem. 
+\[(Q,\norm{\cdot}),\; (\Real,\norm{\cdot}),\; (C,\norm{\cdot}_{L_1}),\;
+      (C,\norm{\cdot}_{L_\infty}),\; (L_1,\norm{\cdot}_{L_1}),\; (L_2,\norm{\cdot}_{L_2}),\; (H^1,\norm{\cdot}_{H^1})\]
+
+      
+\exercise \label{ex:sp2} Definujte prostor $H^1(\Omega)$ a normu zavedenou pomocí standardního skalárního součinu.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%                                  ŘEŠENÍ                          %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Řešení}
+
+\ref{ex:metr1} ano - uzavřenost pro sčítání, násobení reálnýn číslem, platí norma
+
+\ref{ex:metr2} ne, neplatí \ref{norm3}
+
+\ref{ex:norm1}
+\begin{enumerate}[label={\alph*)},itemsep=-5pt, topsep=-7pt]
+\item norma ne (\ref{norm2}), metrika ano
+\item norma ano, metrika ano
+\item norma ne, metrika ano
+\end{enumerate}
+
+\ref{ex:norm2} ne, neplatí \ref{norm3}
+
+\ref{ex:norm3} ano
+
+\ref{ex:norm4} ano
+
+\ref{ex:norm6} ano
+
+\ref{ex:norm7}
+\begin{enumerate}[label=\alph*), itemsep=-3pt, topsep=-7pt]
+  \item $1$, $\frac14$
+  \item $2$, $\infty$
+  \item $\sqrt{\pi}$
+  \item $\pi$, $1$
+  \item $\infty$, $\sqrt{(\frac67)^2+(6)^2}$, $p>\frac12$
+\end{enumerate}
+
+\ref{ex:op1}
+\begin{enumerate}[label=\alph*), itemsep=-3pt, topsep=-7pt]
+  \item ano
+  \item není symetrický, ani poz. def.
+  \item ano, pro $\lambda=konst.$ a $\lambda(y)>0$, $\mu(x) <0$
+  \item ano
+  \item není symetrický, ani poz. def.
+\end{enumerate}
+
+\ref{ex:op2} 
+\begin{enumerate}[label=\alph*), itemsep=-5pt, topsep=-7pt]
+  \item per partes
+  \item Greenova věta
+\end{enumerate}
+
+\ref{ex:op3}
+\begin{enumerate}[label=\alph*), itemsep=-5pt, topsep=-7pt]
+  \item per partes v obou osách
+  \item doplněná nerovnost (Poincareova)
+\end{enumerate}
+
+\ref{ex:con1}
+\begin{enumerate}[label=\alph*), itemsep=-3pt, topsep=-7pt]
+  \item $L_1$ ano, $L_\infty$ ano
+  \item $L_1$ ano, $L_\infty$ ano
+  \item $L_1$ ano, $L_\infty$ ano
+  \item $L_1$ ano, $L_\infty$ ne
+  \item $L_1$ ano, $L_\infty$ ne
+\end{enumerate}
+
+
+\chapter{ODR, SODR, standardní fundamentální systém}
+
+% ODR_soustavy_nehom.pdf
+\exercise \label{ex:ode1} Určete standardní fundamentální systém řešení soustavy
+\begin{eqnarray*}
+\dot{x}_1 &=& -x_1  - x_2 + 5x_3 \\
+\dot{x}_2 &=& -2x_1       + 6x_3 \\
+\dot{x}_3 &=& -2x_1 - x_2 + 6x_3 
+\end{eqnarray*}
+
+% ODR_soustavy_nehom.pdf
+\exercise \label{ex:ode2} Určete standardní fundamentální systém řešení soustavy
+\begin{equation*}
+\vec{\dot{x}} = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 3 & -1 \\ -1 & 2 & 3 \end{pmatrix} \vec{x}.
+\end{equation*}
+
+% ODR_soustavy_nehom.pdf
+\exercise \label{ex:ode3} Určete řešení soustavy pomocí standardního fundamentálního systému
+\begin{eqnarray*}
+\dot{x}_1 &=& x_2  + \cos t, \\
+\dot{x}_2 &=& -x_1 + 1, 
+\end{eqnarray*}
+které splňuje počáteční podmínky $x_1(0)=1$ a $x_2(0)=1$.
+
+% ODR_soustavy_nehom.pdf
+\exercise \label{ex:ode4} Určete řešení soustavy pomocí standardního fundamentálního systému
+\begin{eqnarray*}
+\dot{x}_1 + 5x_1 + x_2 &=& e^t  ,\\
+\dot{x}_2 + 3x_2 - x_1 &=& e^{2t} ,
+\end{eqnarray*}
+které splňuje počáteční podmínky $x_1(0)=1$ a $x_2(0)=1$.
+
+% ODR_soustavy_nehom.pdf
+\exercise \label{ex:ode5} Určete řešení soustavy pomocí standardního fundamentálního systému
+\begin{eqnarray*}
+\dot{x}_1 &=& x_2 - 2e^t ,\\
+\dot{x}_2 &=& x_1 + t^2  ,
+\end{eqnarray*}
+které splňuje počáteční podmínky $x_1(0)=-2$ a $x_2(0)=1$.
+
+% ODR_soustavy_nehom.pdf
+\exercise \label{ex:ode6} Určete řešení soustavy pomocí standardního fundamentálního systému
+\begin{eqnarray*}
+\dot{x}_1 &=& 2x_1 - x_2 ,\\
+\dot{x}_2 &=& -x_1 + 2x_2 - 5e^t \sin t ,
+\end{eqnarray*}
+které splňuje počáteční podmínky $x_1(0)=1$ a $x_2(0)=1$.
+
+% Soustavy lineárních diferenciálních rovnic.pdf
+% je OK
+\exercise \label{ex:ode7} Určete řešení soustavy pomocí standardního fundamentálního systému
+\begin{eqnarray*}
+\dot{x}_1 &=& -x_1 + x_2 -2e^{-t},\\
+\dot{x}_2 &=& -6x_1 + 4x_2 - 4e^{-t},
+\end{eqnarray*}
+které splňuje počáteční podmínky 
+\begin{eqnarray*}
+  a)&\quad& x_1(0)=1,\; x_2(0)=1 \\
+  b)&\quad& x_1(1)=1,\; x_2(1)=1 
+\end{eqnarray*}
+
+
+
+
+\chapter{PDR}
+
+\exercise \label{ex:pde1} Řešte metodou sítí rovnici 
+\begin{equation*}
+\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = y-x \qquad \textrm{ na } \Omega \textrm{ s hranicí } \Gamma.
+\end{equation*}
+Oblast $\Omega$ je pětiúhelník s vrcholy $V_1[-1,0],\,V_2[-1,1.5],\,V_3[0,1.5],\,V_4[0.5,1]$ a $V_5[-0.5,0]$. Okrajová podmínka je zadána
+\begin{equation*}
+u(x,y) = y \qquad \textrm{ na } \Gamma.
+\end{equation*}
+Krok volte 0.5 v obou souřadnicích. Druhou derivaci aproximujte centrální diferencí.
+
+
+\exercise \label{ex:pde2} Řešte metodou sítí rovnici 
+\begin{equation*}
+2\,\frac{\partial^2 u}{\partial x^2} + 3\,\frac{\partial^2 u}{\partial y^2} + u = (x-y)^2 \qquad \textrm{ na } \Omega=(0,1)\times(0,0.8).
+\end{equation*}
+Jsou zadány následující okrajové podmínky:
+\begin{eqnarray*}
+u(0,y) &=& -y \\
+u(1,y) &=& 2y \\
+u(x,0.8) &=& -0.8 + 2.4x \\
+u(x,0) &=& 0
+\end{eqnarray*}
+Krok volte 0.25 v obou souřadnicích. Derivace aproximujte diferencí 2. řádu.
+
+\exercise \label{ex:pde3} Řešte úlohu vedení tepla
+\begin{equation*}
+\frac{\partial u}{\partial t} = 0.3\,\frac{\partial^2 u}{\partial x^2} +x \qquad \textrm{ na } \Omega=(0,1)\times(0,0.4),
+\end{equation*}
+s počáteční podmínkou $u(x,0) = x^2$ pro $x\in [0,1]$ \\
+a okrajovými podmínkami $u(0,t) = 0$, $u(1,t)=1$ pro $t>0$. \\
+Zvolte prostorový krok 0.25 a časový krok co největší tak, aby numerické schéma bylo stabilní.
+
+\exercise \label{ex:pde4} Řešte úlohu vedení tepla
+\begin{equation*}
+\frac{\partial u}{\partial t} = 0.2\,\frac{\partial^2 u}{\partial x^2} + 2t +x \qquad \textrm{ na } \Omega=(0,1)\times(0,T),
+\end{equation*}
+s počáteční podmínkou $u(x,0) = 0$ pro $x\in [0,1]$ \\
+a okrajovými podmínkami $u(0,t) = 0$, $u(1,t)=3t$ pro $t>0$. \\
+Zvolte prostorový krok 0.25 a časový krok 0.1. Ověřte, že explicitní numerické schéma bude stabilní a spočtěte aproximaci $u(0.75,0.4)$.
+
+
+
+
+
+
+\end{document}
