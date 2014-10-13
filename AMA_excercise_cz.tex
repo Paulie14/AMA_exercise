@@ -447,7 +447,14 @@ Metrika je generována normou $\metr{x}{y} = \norm{x-y}$ (neplatí opačně), sp
 \exercise \label{ex:metr2} Ověřte, že množina $M \subset \Real^2$ s~normou 
   $\norm{(x_1,x_2)}=\left(\sqrt{\abs{x_1}} + \sqrt{\abs{x_2}}\right)^2$ tvoří normovaný vektorový podprostor.
 
-\exercise \label{ex:norm1} Ověřte, že zadané funkce jsou normami nebo metrikami.
+\exercise \label{ex:metr3} Ověřte, zdali mohou být zadané funkce metrikami.
+
+\begin{tabbedenum}{2}
+\item $\metr{u}{v}=\sqrt{\int \limits_a^b \abs{u(x)-v(x)} \d x}$
+\item $\metr{u}{v}=\sqrt{\int \limits_a^b \abs{u(x)-v(x)}^2 \d x}$
+\end{tabbedenum}
+
+\exercise \label{ex:norm1} Ověřte, zdali mohou být zadané funkce normami.
 
 \begin{tabbedenum}{3}
 \item $\norm{u}=\sqrt{\int \limits_a^b \abs{u(x)} \d x}$
@@ -455,7 +462,7 @@ Metrika je generována normou $\metr{x}{y} = \norm{x-y}$ (neplatí opačně), sp
 \item $\norm{u}=\sqrt{\int \limits_a^b \abs{u(x)}^3 \d x}$
 \end{tabbedenum}
 
-\exercise \label{ex:norm2} Ověřte, že množina funkcí $M \subset \C [0,1]$ s normou 
+\exercise \label{ex:norm2} Ověřte, zdali množina funkcí $M \subset \C [0,1]$ s normou 
   $\norm{f}=\int \limits_0^1 \abs{f(x)}^2 \d x$ tvoří normovaný vektorový podprostor.
 
 \exercise \label{ex:norm3} Ověřte, že množina polynomů $M = \{p(x)=ax^2+bx+c \where a,b,c \in \Real\}$ s~normou 
@@ -549,14 +556,20 @@ na daném prostoru se skalárním součinem $Z$. Bude potřeba použít nerovnos
 
 \ref{ex:metr2} ne, neplatí \ref{norm3}
 
-\ref{ex:norm1}
+\ref{ex:metr3}
 \begin{enumerate}[label={\alph*)},itemsep=-5pt, topsep=-7pt]
-\item norma ne (\ref{norm2}), metrika ano
-\item norma ano, metrika ano
-\item norma ne, metrika ano
+\item ano
+\item ano
 \end{enumerate}
 
-\ref{ex:norm2} ne, neplatí \ref{norm3}
+\ref{ex:norm1}
+\begin{enumerate}[label={\alph*)},itemsep=-5pt, topsep=-7pt]
+\item ne (\ref{norm2})
+\item ano
+\item ne (\ref{norm2})
+\end{enumerate}
+
+\ref{ex:norm2} ne, neplatí \ref{norm2} ani \ref{norm3}
 
 \ref{ex:norm3} ano
 
